@@ -1,0 +1,13 @@
+replicaCount : 3
+image : nginx:1.29
+
+service: 
+  port: 80
+  nodePort: 8080
+  type : ClusterIP
+
+ingress:
+  enabled : true
+
+      
+

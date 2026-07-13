@@ -1,0 +1,6 @@
+apiVersion: v2     #it is helm api version and it is  not the k8s version
+name: helm-manuall   #chart name
+description: My first Helm chart  
+type: application  #there are two types one is appliaction and another one is library
+version: 0.1.0      #helm chart version
+appVersion: "1.29"  #version of the application
