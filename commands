@@ -1,0 +1,17 @@
+        Command	                                Purpose
+when you want to use existing chart like promethius and grafana, you just use the exising chart by below command , "no need to create the chart"  by using create command ,  
+
+    helm repo list
+    helm repo update
+    helm repo add <existing-chart-name>
+    helm search repo         to search the repo
+
+when you want to create your own appliaction , you have to crete the chart first by below coammdn and then remaing commands 
+
+helm create <chart-name>	                Create a new Helm chart
+helm install <release name><chart name>	    Install a local chart
+helm list	                                List releases
+kubectl get all	                            View created Kubernetes resources
+helm template <release name><chart name>	Render templates without installing
+helm lint <chart name>	                    Validate the chart
+helm uninstall <release name>	            Remove the release

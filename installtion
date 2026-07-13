@@ -1,0 +1,151 @@
+What is a Helm Chart?
+
+Definition
+
+A Helm Chart is a package that contains all the files needed to deploy an application on Kubernetes.
+---------------------------------------------------------------------------------------------------
+
+We'll create our first chart:
+
+    helm create springboot-app
+
+    You'll see:
+
+    springboot-app/
+    │
+    ├── Chart.yaml
+    ├── values.yaml
+    ├── charts/
+    ├── templates/
+    │   ├── deployment.yaml
+    │   ├── service.yaml
+    │   ├── ingress.yaml
+    │   ├── serviceaccount.yaml
+    │   ├── hpa.yaml
+    │   ├── _helpers.tpl
+    │   └── NOTES.txt
+    └── .helmignore
+
+what is inside the 
+
+chart.yaml
+
+    Chart.yaml contains the metadata (information) about the Helm Chart.
+
+        Think of it as the identity card or passport of the chart.
+
+        It tells Helm:
+
+        What is the chart name?
+        What is the version?
+        Who created it?
+        What application does it deploy?
+        Does it have dependencies?
+
+    exapmle :
+        apiVersion: v2
+        name: springboot-app
+        description: Helm chart for Spring Boot application
+        type: application
+        version: 0.1.0
+        appVersion: "1.0.0"
+
+values.yaml
+
+    values.yaml stores the configurable values used by the Helm templates.
+
+
+    Instead of hardcoding values in Kubernetes YAML, Helm stores them here.
+
+    Examples:
+
+    Number of replicas
+    Docker image
+    Image tag
+    Service type
+    Port
+    Namespace
+    Resource limits
+    Environment variables
+    Ingress host
+
+    Example
+        replicaCount: 2
+
+        image:
+        repository: nginx
+        tag: "1.27"
+
+        service:
+        type: ClusterIP
+        port: 80
+
+charts/
+
+    The charts/ directory stores dependent (child) Helm charts that your main chart depends on.
+
+    Example 
+
+    Imagine you're deploying your own application.
+
+    Your application needs:
+        MySQL Database
+        Redis Cache
+
+    Without Helm, you would install them separately:
+
+    Application
+    MySQL
+    Redis
+
+    Three separate installations.
+
+    With Helm, you can package everything together.
+
+    my-application-chart
+    │
+    ├── Application
+    ├── MySQL Chart
+    └── Redis Chart
+
+    MySql and Redis charts are stored inside the chart/ directory
+
+
+
+templet : 
+
+    this will conatin all the k8s file , where the value will be passed from values.yaml file and here in this file va;lues will b
+
+    replicas: {{ .Values.replicaCount }}
+
+    in this formate
+
+-----------------------------------------------------------------------------------------------------------
+How Helm Works Internally
+
+    We will understand the complete flow:
+
+    Developer
+        │
+        ▼
+    helm install
+        │
+        ▼
+    Read Chart.yaml
+        │
+    Read values.yaml
+        │
+    Read templates/
+        │
+    Replace template variables
+        │
+    Generate Kubernetes YAML
+        │
+    Send YAML to Kubernetes API Server
+        │
+    Pods Created
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
