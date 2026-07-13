@@ -1,0 +1,146 @@
+Introduction to Helm
+
+Before Helm
+
+Suppose you want to deploy a Spring Boot application to Kubernetes.
+
+You would need to create several YAML files like
+
+deployment.yaml, service.yaml, configmap.yaml,secret.yaml,ingress.yaml,hpa.yaml,pvc.yaml,networkpolicy.yaml
+
+For a single application, it's common to have 8 to 15 YAML files.
+
+Now imagine you have:
+
+Dev environment
+QA environment
+Stage environment
+Production environment
+
+You would either:
+
+Maintain separate copies of these YAMLs, or Edit values manually for each environment.
+
+This becomes difficult to manage.
+
+Problems Without Helm
+
+Suppose your application image changes.
+
+Old image: myapp:v1
+
+New image: myapp:v2
+
+You must update every Deployment YAML that references the image.
+
+If you also need to change:
+
+Replica count
+Namespace
+Service type
+Ingress host
+Resource limits
+
+those changes have to be repeated in multiple places. This is time-consuming and increases the chance of mistakes.
+
+Helm Solves This Problem
+
+Helm lets you create a template with variables.
+
+Example:
+
+image:
+  repository: myapp
+  tag: v2
+
+replicaCount: 3
+
+Instead of hardcoding values in every YAML, Helm substitutes these values when it generates the Kubernetes manifests.
+
+--------------------------------------------------------------------------------------------
+What is Helm?
+
+Helm is the package manager for Kubernetes. Just as "apt install nginx"  installs and configures NGINX on Ubuntu, Helm can install complex Kubernetes applications with a single command.
+
+----------------------------------------------------------------------------------------
+What is a Helm Chart?
+
+A Helm Chart is a package containing everything needed to deploy an application.
+
+        "helm install my-nginx bitnami/nginx"
+
+Here:
+
+Chart = bitnami/nginx (the package)
+Release = my-nginx (the installed instance)
+
+--------------------------------------------------------------------------------------------
+
+what is release : it is the running instance of the chart running in k8s cluster 
+
+Easiest Way to Remember
+Think of it like this:
+
+Chart = Blueprint 📄
+Release = Building built from that blueprint 🏢
+
+      "helm install my-nginx bitnami/nginx"
+
+Here:
+
+Chart = bitnami/nginx (the package)
+Release = my-nginx (the installed instance)
+
+
+We can use same chart for deploying in multiple/same environemnt by using different release name 
+
+      
+      "helm install Dev bitnami/nginx"
+      
+      "helm install Prod bitnami/nginx"
+
+Here:
+
+Chart = bitnami/nginx  (the package)
+Release = Dev & Prod   (the installed instance)
+-----------------------------
+
+Why is it called a Release?
+
+When Helm installs a chart, it "releases" that application into the Kubernetes cluster.
+
+That deployed application is called a Release.
+
+Each release contains:
+
+  The deployed Kubernetes resources (Deployment, Service, ConfigMap, etc.)
+  The configuration used (values.yaml)
+  The chart version
+  The release history (used for upgrades and rollbacks)
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+Here:
+
+Chart = bitnami/nginx (the package)
+Release = my-nginx (the installed instance)
+
+
+Here:
+
+Chart = bitnami/nginx (the package)
+Release = my-nginx (the installed instance)
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
