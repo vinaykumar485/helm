@@ -29,16 +29,15 @@ spec:
           image: "{{ .Values.image }}:{{ .Values.tag }}" 
           #result will be image name & the tag which we nemtioned in values.yaml file eg: "nginx:1.26"
           
-          #image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}" #wehn we use "default", result will be if the image tag is not mentioned in values.yaml file the iamge tag          #will be "latest" eg: "nginx:latest"
-          
+                  
           ports: 
-            - containerPort: "{{ .Values.service.containerPort }}"   #this can be used when there is only one port ,
+            - containerPort: {{ .Values.service.containerPort }}   #this can be used when there is only one port ,
 
             #suppose you want to expose multiple port like 80, 22, 443  then we can go with "range " that is shown below
             #
             #
             #ports:
-            #"{{- range .Values.ports}}
+            # {{- range .Values.ports}}
             #   - containerPort: {{.}}
             # {{- end }}
           

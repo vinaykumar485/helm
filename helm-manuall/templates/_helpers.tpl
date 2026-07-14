@@ -1,8 +1,6 @@
-{{ define "my-chart.fullname"  }}
-
+{{ define "my-chart.fullname" -}}
 my-nginx
-
-{{ end }}
+{{- end -}}
 
 #here we are defining the value of "my-chart.fullname" as "my-nginx" and calling this value in deployment.yaml and service,.yaml files 
 #
