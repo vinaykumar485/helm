@@ -19,4 +19,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: "{{ .Values.image }}"
+          image: "{{ .Values.image }}:{{ .values.image.tag }}"  #result will be image name & the tag which we nemtioned in values.yaml file eg: "nginx:1.26"
+          
+          #image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}" #wehn we use "default", result will be if the image tag is not mentioned in values.yaml file the iamge tag          #will be "latest" eg: "nginx:latest"
