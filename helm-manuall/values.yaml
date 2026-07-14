@@ -1,6 +1,6 @@
 replicaCount : 3
-image : nginx:1.29
-
+image : nginx
+tag: 1.29
 service: 
   port: 80
   nodePort: 8080
