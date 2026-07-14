@@ -2,7 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: my-nginx
+
+  #name: my-nginx    #this is hardcoded here
+  name: {{ include "my-chart.fullname" . }}  
+  
+  #result will be my-nginx when you run "helm template"
+  #when we use "include" these value will be inserted from "_helper.tpl" 
+  #where we will define the value of "my-chart.fullname" value,
+  #this include is usefull,when you want to incude same varible in multiple files like in deployment.yaml,service.yaml and so on..
 
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -19,12 +26,13 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: "{{ .Values.image }}:{{ .values.image.tag }}"  #result will be image name & the tag which we nemtioned in values.yaml file eg: "nginx:1.26"
+          image: "{{ .Values.image }}:{{ .Values.tag }}" 
+          #result will be image name & the tag which we nemtioned in values.yaml file eg: "nginx:1.26"
           
           #image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}" #wehn we use "default", result will be if the image tag is not mentioned in values.yaml file the iamge tag          #will be "latest" eg: "nginx:latest"
           
-          port: 
-            containerPort: "{{ .Values.port }}"   #this can be used when there is only one port ,
+          ports: 
+            - containerPort: "{{ .Values.service.containerPort }}"   #this can be used when there is only one port ,
 
             #suppose you want to expose multiple port like 80, 22, 443  then we can go with "range " that is shown below
             #
