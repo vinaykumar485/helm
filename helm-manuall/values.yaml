@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 2
 
 image: nginx
 tag: "1.29"
@@ -9,4 +9,4 @@ service:
   type: ClusterIP
 
 ingress:
-  enabled: true
+  enabled: false

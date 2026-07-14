@@ -1,0 +1,70 @@
+Helm Upgrade
+What is helm upgrade?
+
+After an application is already installed in Kubernetes, you don't install it again.
+
+Instead, you upgrade the existing release.
+
+Syntax
+
+	helm upgrade <RELEASE_NAME> <CHART_PATH>
+
+Example: 
+
+Suppose your cluster has:
+
+Deployment
+Replica: 3
+Image: nginx:1.29
+
+Now you change:
+
+values.yaml
+
+tag: "1.30"
+
+Run:
+
+helm upgrade my-release .
+
+
+
+Helm performs these steps:
+
+	Read Chart.yaml
+        	│
+	Read values.yaml
+        	│
+	Render templates
+        	│
+	Compare old manifest
+        	│
+	Compare new manifest
+        	│
+	Find differences
+        	│
+	Update only changed resources
+
+Helm does not delete everything and recreate it. It updates only what changed.
+
+
+
+
+Verify the Upgrade
+
+Check releases:
+
+	helm list
+
+Check revision history:
+
+	helm history my-release
+
+You'll see something like:
+
+REVISION    STATUS      DESCRIPTION
+1           deployed    Install complete
+2           deployed    Upgrade complete
+3           deployed    Upgrade complete
+
+Each successful helm upgrade creates a new revision
