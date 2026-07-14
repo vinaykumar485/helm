@@ -2,7 +2,7 @@ replicaCount : 3
 image : nginx
 tag: 1.29
 service: 
-  port: 80
+  port: 80     #for exposing mtiple port go with "range" in deployment.yaml file and in values.yaml file mention it as ports [ 22, 80, 443 ]
   nodePort: 8080
   type : ClusterIP
 
