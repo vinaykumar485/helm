@@ -2,14 +2,16 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: my-nginx-service
+ # name: my-nginx-service
+
+  name: {{ include "my-chart.fullname" . }} #these value will be inserted from _helper.tls file where we have defined the value as "my-nginx"
 
 spec:
   selector:
     app: nginx
 
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+    - port: {{ .Values.service.containerPort }}
+      targetPort: {{ .Values.service.containerPort }}
 
   type: {{ .Values.service.type }}
