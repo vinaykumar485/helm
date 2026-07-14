@@ -1,0 +1,125 @@
+What is a Helm Repository?
+
+A Helm Repository is like an App Store for Kubernetes.
+
+Instead of downloading applications manually, you install them using Helm.
+
+Examples:
+
+NGINX
+Prometheus
+Grafana
+Jenkins
+Argo CD
+PostgreSQL
+Redis
+Elasticsearc
+
+----------------------------------------------------------------------------------------
+
+Helm Repository
+      ↓
+Stores Helm Charts
+
+----------------------------------------------------------------------------------------
+
+Popular Helm Repositories
+
+Repository			Purpose
+Bitnami				General applications (NGINX, MySQL, Redis, PostgreSQL, Jenkins)
+Prometheus Community		Prometheus, Alertmanager, kube-prometheus-stack
+Grafana				Grafana, Loki, Tempo
+Argo				Argo CD, Argo Workflows
+Elastic				Elasticsearch, Kibana
+Jetstack			cert-manager
+ingress-nginx			NGINX Ingress Controller
+
+---------------------------------------------------------------------------------------------------------
+
+
+Most commaon Helm epository command
+
+# Add repository
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# List repositories
+helm repo list
+
+# Update repository index
+helm repo update
+
+# Search charts
+helm search repo <chartname>
+
+# Search all versions
+helm search repo <chart name> --versions
+
+# Show chart metadata
+helm show chart<chat name>  
+
+# Show default values
+helm show values <chat name>
+
+# Install chart
+helm install <release name> <chart name>
+
+# List installed releases
+helm list
+
+# Check status
+helm status <release name>
+
+# Remove release
+helm uninstall <release name>
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+what is difference bet helm upgrde and helm repo update.
+
+
+helm repo update :
+
+this is used to update on your local that meams, hen you run repo upadate, if suppose you have downloded nginx in local by helm repo add command and now nginx has relesed the 21 version and , when you run repo update local ownloded nginx will het updated to 21 version and it wont effect the relese in your VM machine, POD etc...
+
+helm upgrde :
+
+this is for up[grading your installed running apliaction  eg : increasing the pod repiclica in yaml and then you run thr helm upgrade command   this will increse the pod , somthing like that, it will upgrde the istalled apliaction in central.
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11111111111111111
