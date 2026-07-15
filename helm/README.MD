@@ -214,6 +214,18 @@ Eg : when you run "helm install <release name ><chart name>   you will get all t
 
 --------------------------------------------------------------------------------------------------------------------------------------------------- 
 
+Dependencies:
+
+command:
+
+update the chart.yaml file with depandencies 
+
+helm dependency update
+
+helm install <release name><chhart name>
+
+helm dependancy list
+
 
 
 
