@@ -16,7 +16,7 @@ when you want to create your own appliaction , you have to crete the chart first
 
 4.kubectl get all	                            View created Kubernetes resources
 
-5.helm template <release name><chart name>	Render templates without installing / give the details resource which are goin to create
+5.helm template <release name><chart name>	     Render templates without installing / give the details resource which are goin to create
 
 6.helm lint <chart name>	                    Validate the chart
 
