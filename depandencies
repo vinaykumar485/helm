@@ -1,0 +1,98 @@
+Depandencies:
+
+this is used to downloed the depandencies for the appliction from the onther chart 
+
+Eg:
+
+consider you are deplying an e-commars application which reqires MySQL, nginx, redis etc.. 
+
+in general , we will create a chart for e-commars and another chart for MySQL, nginx, Redis.
+
+and we will install each depandencies saperaatly and then we will install our appliction chart again. so wich will consule more tiime and energy, so to avoid that, we will creat an directory called as "chert" inside the ecommars chart and pass all the dependencies in that and then we will install an single chart 
+
+
+Instead of creating these from scratch, you reuse existing Helm charts.
+
+this is the existing helm chart 
+
+
+My Application
+       │
+       ├── MySQL Chart
+       ├── Redis Chart
+       └── Rabis chart
+
+
+here, we will pass this complet chart  in chart.yaml file  of the main chart , that is as below
+
+
+ecommerce/
+
+Chart.yaml
+values.yaml
+templates/
+
+
+inside the chart.yaml  we will pass the dependencies as below
+
+
+Example:
+
+chart.yaml
+
+apiVersion: v2
+name: ecommerce
+description: Helm chart for an ecommerce application
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+  - name: mysql
+    version: "13.4.2"
+    repository: "https://charts.bitnami.com/bitnami"
+
+  - name: redis
+    version: "20.0.0"
+    repository: "https://charts.bitnami.com/bitnami"
+
+
+----
+
+Download the Dependencies
+
+After adding them to Chart.yaml,downlod the dependencies. 
+
+run:
+
+	helm dependency update
+
+
+once you run this command my compete chart becoms as below, where charts./ containe my zipped depandency files
+
+
+final chart:
+
+
+Ecommars/
+   chart.yaml
+   values.yaml
+   templates/
+charts/
+    mysql-13.4.2.tgz
+    redis-20.0.0.tgz
+
+
+and then  runing the below command we can install all these ecommars, mysql, redis, ngix at once 
+
+	helm install <relese name> <chart name>
+
+
+Verify Dependencies
+
+Run:
+
+	helm dependency list
+
+
+

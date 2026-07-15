@@ -203,6 +203,28 @@ the over ride method follows as below
 -----------------------------------------------------------------------------------------------------------------------------------------
 
  
+helm package :
+
+this is used for compress the chart in to ziped formate
+
+synetx : 
+	helm package <chart name>
+
+Eg : when you run "helm install <release name ><chart name>   you will get all the k8s files along with values.yaml and chart.yaml file with template dirctory, which give you more numner of files , it will be difficult to share each file, so you can compress this complere chart and share it as a ziped file by using pakage command
+
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Dependencies:
+
+command:
+
+update the chart.yaml file with depandencies 
+
+helm dependency update
+
+helm install <release name><chhart name>
+
+helm dependancy list
 
 
 
