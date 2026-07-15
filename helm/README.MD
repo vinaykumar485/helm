@@ -145,3 +145,78 @@ It should no longer appear.
 -----------------------------------------------------------------------------------------------
 
 
+--set & -f command
+
+--set is used to over ride the value from the commad line insted of editing the values.yaml file 
+
+-f command is used to over ride the values in specific values.yaml file whem there are multipe values.yaml file
+
+Eg: 
+
+consider you have prod-values.yaml in which 
+	replicas = 5 
+	images=ubuntu
+	   tag = 1.25
+ 
+which will result in creating the 5 replicas 
+
+now you want to make the rplicas 10, so insted of editing the prod-values.yaml file, we can use --set command as below.
+
+	helm install < release name >  --set replicaCount=10 
+
+suppose you have to change image name also then we can use below command  ( for multiple values override )
+
+helm install <release name> --set replicasCount=10,--set image=nginx
+
+
+if you want to update the sub metadata like tag then along with --set we have to use "." 
+
+	helm nstal release name> . --set replicas=10,image=nginx,tag=1.30
+
+
+---------
+
+suppose you have mutiple environemt like prod , Dev and you have to change only in Dev , tere comes the '-f' command 
+
+Eg: you have 
+
+prod-values.yaml 
+
+replicaCount = 3 
+image = ubuntu
+
+
+
+Dev-values.yaml
+
+replicasCount = 4
+image = nginx 
+
+now you want to override the values of Dev-values.yaml file and keep Prod-Values.yaml files as it is with out any chnages.
+
+	helm install < releae name >  --set replicas=10 -f Dev-values.yaml
+the over ride method follows as below
+
+
+--set override -f 
+-f override values.yaml
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
